@@ -1666,22 +1666,9 @@ const Hero = ({ onNavigate, onTalkToCounselor }: { onNavigate: (page: string) =>
             className="relative flex justify-center items-center"
           >
             <div className="relative w-full max-w-[580px] aspect-square flex items-center justify-center">
-              {/* Central Laptop Mock */}
-              <div className="relative z-10 w-4/5 transform -rotate-[12deg] skew-x-[12deg] transition-transform hover:rotate-0 hover:skew-x-0 duration-700">
-                <div className="bg-white rounded-[2rem] shadow-[0_40px_100px_-20px_rgba(37,99,235,0.2)] p-2 md:p-3 relative z-10 border border-slate-100">
-                  <div className="bg-slate-900 rounded-[1.5rem] aspect-video w-full overflow-hidden relative group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-transparent"></div>
-                    <div className="p-4 sm:p-8 flex flex-col gap-3">
-                      <div className="h-2 w-1/4 bg-blue-500/30 rounded"></div>
-                      <div className="h-2 w-1/2 bg-slate-700 rounded"></div>
-                      <div className="h-2 w-2/3 bg-slate-700 rounded"></div>
-                      <div className="h-2 w-1/3 bg-blue-400/20 rounded"></div>
-                    </div>
-                    <Terminal className="absolute bottom-6 right-6 text-blue-500 opacity-20" size={80} />
-                  </div>
-                </div>
-                {/* Laptop Base */}
-                <div className="h-4 w-[105%] bg-slate-200 rounded-b-3xl absolute -bottom-3 left-[-2.5%] -z-10 shadow-lg"></div>
+              {/* Central Banner Image */}
+              <div className="relative z-10 w-full rounded-[3rem] overflow-hidden border-8 border-slate-50 aspect-[4/3] shadow-2xl shadow-blue-900/10">
+                <img src={homeImg} alt="Learn and Build" className="w-full h-full object-cover" />
               </div>
 
               {/* Floating Elements from Image */}
