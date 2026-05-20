@@ -52,7 +52,7 @@ import hclLogo from './images/hcl.png';
 import tcsLogo from './images/tcs logo.png';
 import techMahindraLogo from './images/techmahindra.png';
 import wiproLogo from './images/wiprologo.png';
-
+import CareersPage from './CareersPage';
 // --- Navbar ---
 const Navbar = ({ activePage, setActivePage, onTalkToCounselor, isDarkMode, toggleDarkMode }: { activePage: string, setActivePage: (page: string) => void, onTalkToCounselor: () => void, isDarkMode: boolean, toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -64,7 +64,7 @@ const Navbar = ({ activePage, setActivePage, onTalkToCounselor, isDarkMode, togg
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const links = ['Home', 'About Us', 'Services', 'Courses', 'Placements', 'Contact Us'];
+  const links = ['Home', 'About Us', 'Services', 'Courses', 'Placements', 'Contact Us', 'Careers'];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? (isDarkMode ? 'bg-slate-900/95 shadow-lg' : 'bg-white/95 shadow-sm') : 'bg-transparent'} backdrop-blur-md py-2 md:py-3`}>
@@ -4110,6 +4110,7 @@ export default function App() {
 
       <main className="pt-20">
         {activePage === 'Home' && <HomePage onNavigate={setActivePage} onOpenCourse={setSelectedCourse} onTalkToCounselor={handleTalkToCounselor} />}
+        {activePage === 'Careers' && <CareersPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
         {activePage === 'About Us' && <AboutPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} onOpenCourse={setSelectedCourse} />}
         {activePage === 'Services' && <ServicesPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} onOpenCourse={setSelectedCourse} />}
         {activePage === 'Courses' && <CoursesPage onOpenCourse={setSelectedCourse} onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
