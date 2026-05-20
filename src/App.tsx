@@ -52,7 +52,7 @@ import hclLogo from './images/hcl.png';
 import tcsLogo from './images/tcs logo.png';
 import techMahindraLogo from './images/techmahindra.png';
 import wiproLogo from './images/wiprologo.png';
-import CareersPage from './CareersPage';
+import { CareersPage } from './CareersPage';
 // --- Navbar ---
 const Navbar = ({ activePage, setActivePage, onTalkToCounselor, isDarkMode, toggleDarkMode }: { activePage: string, setActivePage: (page: string) => void, onTalkToCounselor: () => void, isDarkMode: boolean, toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,7 +73,7 @@ const Navbar = ({ activePage, setActivePage, onTalkToCounselor, isDarkMode, togg
           <img src={logo} alt="ITCareer Logo" className="w-32 h-12 md:w-40 md:h-16 object-contain" />
         </button>
 
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-6">
           {links.map((link) => (
             <button
               key={link}
@@ -4110,7 +4110,6 @@ export default function App() {
 
       <main className="pt-20">
         {activePage === 'Home' && <HomePage onNavigate={setActivePage} onOpenCourse={setSelectedCourse} onTalkToCounselor={handleTalkToCounselor} />}
-        {activePage === 'Careers' && <CareersPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
         {activePage === 'About Us' && <AboutPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} onOpenCourse={setSelectedCourse} />}
         {activePage === 'Services' && <ServicesPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} onOpenCourse={setSelectedCourse} />}
         {activePage === 'Courses' && <CoursesPage onOpenCourse={setSelectedCourse} onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
@@ -4119,6 +4118,7 @@ export default function App() {
         {activePage === 'Apply Now' && <ApplyNowPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
         {activePage === 'Privacy Policy' && <PrivacyPolicyPage />}
         {activePage === 'Terms & Conditions' && <TermsConditionsPage />}
+        {activePage === 'Careers' && <CareersPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
       </main>
 
       <Footer onNavigate={setActivePage} isDarkMode={isDarkMode} onTalkToCounselor={handleTalkToCounselor} />
