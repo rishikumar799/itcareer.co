@@ -499,7 +499,12 @@ const OfficeSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => void })
               </div>
               <div>
                 <h4 className="font-heading font-black text-slate-900 text-[11px] uppercase tracking-widest mb-2">Email</h4>
-                <p className="text-slate-500 font-extrabold text-base md:text-lg">info@itcareer.co</p>
+                <a
+                  href="mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!"
+                  className="text-slate-500 hover:text-blue-600 transition-colors font-extrabold text-base md:text-lg text-left inline-block"
+                >
+                  info@itcareer.co
+                </a>
               </div>
             </div>
           </div>
@@ -2677,8 +2682,16 @@ const PrivacyPolicyPage = () => {
             </h2>
             <p className="text-sm leading-relaxed mb-6">If you have any questions about this Privacy Policy, please contact us:</p>
             <ul className="space-y-3 text-sm font-bold">
-              <li className="flex items-center gap-3 text-slate-700"><Mail size={16} className="text-blue-500" /> info@itcareer.co</li>
-              <li className="flex items-center gap-3 text-slate-700"><Phone size={16} className="text-blue-500" /> +1 469 518 9938</li>
+              <li className="flex items-center gap-3 text-slate-700">
+                <Mail size={16} className="text-blue-500" />
+                <a
+                  href="mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!"
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  info@itcareer.co
+                </a>
+              </li>
+              <li className="flex items-center gap-3 text-slate-700"><Phone size={16} className="text-blue-500" /> +1 (945) 732-9000</li>
               <li className="flex items-center gap-3 text-slate-700"><MapPin size={16} className="text-blue-500" /> Plano, Texas, USA</li>
             </ul>
           </section>
@@ -2908,7 +2921,7 @@ const WhatsAppButton = () => {
 };
 
 // --- Footer ---
-const Footer = ({ onNavigate, isDarkMode }: { onNavigate: (page: string) => void, isDarkMode: boolean }) => {
+const Footer = ({ onNavigate, isDarkMode, onTalkToCounselor }: { onNavigate: (page: string) => void, isDarkMode: boolean, onTalkToCounselor: () => void }) => {
   return (
     <footer className={`${isDarkMode ? 'bg-slate-950 text-slate-400 border-slate-900' : 'bg-[#020817] text-slate-400 border-slate-900'} pt-20 pb-10 border-t`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -2996,14 +3009,20 @@ const Footer = ({ onNavigate, isDarkMode }: { onNavigate: (page: string) => void
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="flex items-center gap-3 text-[10px] font-bold text-slate-500 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-800">
+            <button
+              onClick={onTalkToCounselor}
+              className="flex items-center gap-3 text-[10px] font-bold text-slate-500 hover:text-white bg-slate-900/50 hover:bg-slate-900 px-4 py-2 rounded-lg border border-slate-800 transition-all cursor-pointer"
+            >
               <Phone size={12} className="text-[#0057FF]" />
               +1 469 518 9938
-            </div>
-            <div className="flex items-center gap-3 text-[10px] font-bold text-slate-500 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-800">
+            </button>
+            <a
+              href="mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!"
+              className="flex items-center gap-3 text-[10px] font-bold text-slate-500 hover:text-white bg-slate-900/50 hover:bg-slate-900 px-4 py-2 rounded-lg border border-slate-800 transition-all"
+            >
               <Mail size={12} className="text-[#00C4CC]" />
               info@itcareer.co
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -3037,7 +3056,7 @@ const ContactHero = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) =
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
                 { icon: <Phone size={20} />, label: 'Call Us', val: '+1 (945) 732-9000', onClick: onTalkToCounselor },
-                { icon: <Mail size={20} />, label: 'Email Us', val: 'info@itcareer.co' },
+                { icon: <Mail size={20} />, label: 'Email Us', val: 'info@itcareer.co', onClick: () => window.location.href = 'mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!' },
                 { icon: <Clock size={20} />, label: 'Office Hours', val: 'Mon - Sat: 9AM - 7PM' }
               ].map((item, i) => (
                 <motion.div
@@ -3194,7 +3213,7 @@ const ContactFormSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => vo
                 <div className="space-y-8">
                   {[
                     { icon: <Phone size={24} />, label: 'Phone', val: '+1 (945) 732-9000', onClick: onTalkToCounselor },
-                    { icon: <Mail size={24} />, label: 'Email', val: 'info@itcareer.co' },
+                    { icon: <Mail size={24} />, label: 'Email', val: 'info@itcareer.co', onClick: () => window.location.href = 'mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!' },
                     { icon: <MapPin size={24} />, label: 'Office Address', val: '3401 Cluster Road Suite #164, Plano, Texas 75023' }
                   ].map((item, i) => (
                     <div key={i} className={`flex gap-6 group ${item.onClick ? 'cursor-pointer' : ''}`} onClick={item.onClick}>
@@ -3358,7 +3377,7 @@ const FAQSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) =>
                 </div>
                 <div className="w-px h-4 bg-slate-200 hidden md:block"></div>
                 <div className="text-[11px] font-bold text-slate-500">
-                  Email us at <span className="text-blue-600 font-black">info@itcareer.co</span>
+                  Email us at <a href="mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!" className="text-blue-600 font-black hover:underline transition-colors">info@itcareer.co</a>
                 </div>
               </div>
             </div>
@@ -3734,12 +3753,15 @@ const ApplyNowForm = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) 
                   </div>
                   <span className="text-xs font-black">+1 (945) 732-9000</span>
                 </button>
-                <div className="flex items-center gap-4">
+                <a
+                  href="mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!"
+                  className="flex items-center gap-4 hover:opacity-80 transition-opacity text-left"
+                >
                   <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
                     <Mail size={18} />
                   </div>
                   <span className="text-xs font-black">info@itcareer.co</span>
-                </div>
+                </a>
               </div>
               <button
                 onClick={onTalkToCounselor}
