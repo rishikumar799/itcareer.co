@@ -3388,7 +3388,7 @@ const FAQSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) =>
   );
 };
 
-const ContactCTA = () => {
+const ContactCTA = ({ onNavigate, onTalkToCounselor }: { onNavigate: (page: string) => void, onTalkToCounselor: () => void }) => {
   return (
     <section className="mx-6 md:mx-12 mb-12 overflow-hidden">
       <div className="max-w-7xl mx-auto rounded-[3.5rem] py-12 px-8 text-white relative overflow-hidden shadow-2xl shadow-blue-500/20">
@@ -3409,10 +3409,10 @@ const ContactCTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-10 py-5 bg-white text-[#0057FF] rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-blue-900/10 border-2 border-white">
+            <button onClick={() => onNavigate('Courses')} className="px-10 py-5 bg-white text-[#0057FF] rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-blue-900/10 border-2 border-white">
               Explore Courses →
             </button>
-            <button className="px-10 py-5 bg-transparent border-2 border-white text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+            <button onClick={onTalkToCounselor} className="px-10 py-5 bg-transparent border-2 border-white text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
               Talk to Counselor
             </button>
           </div>
@@ -3693,7 +3693,7 @@ const ApplyNowForm = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) 
                   <label htmlFor="agree" className="text-[11px] text-slate-500 font-medium">I agree to receive updates and information from ITCareer</label>
                 </div>
 
-                <button className="w-full px-10 py-5 bg-[#0057FF] text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-3">
+                <button type="submit" className="w-full px-10 py-5 bg-[#0057FF] text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-3">
                   Submit Application <ArrowRight size={18} />
                 </button>
               </form>
