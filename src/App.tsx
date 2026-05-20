@@ -61,6 +61,7 @@ import placementsImg from './images/placements.png';
 import coursesImg from './images/courses.png';
 import contactUsImg from './images/contactus.png';
 import careersImg from './images/careers.png';
+import whoweareImg from './images/whoweare.png';
 // --- Navbar ---
 const Navbar = ({ activePage, setActivePage, onTalkToCounselor, isDarkMode, toggleDarkMode }: { activePage: string, setActivePage: (page: string) => void, onTalkToCounselor: () => void, isDarkMode: boolean, toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -237,8 +238,8 @@ const WhoWeAre = () => {
           <div className="relative">
             <div className="rounded-[4rem] overflow-hidden shadow-2xl shadow-blue-900/10 border-8 border-white group aspect-[4/3]">
               <img
-                src={aboutImg}
-                alt="Office Space"
+                src={whoweareImg}
+                alt="Who We Are"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
