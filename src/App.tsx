@@ -44,7 +44,7 @@ import {
   Moon,
   Sun
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useTransform, animate, useInView } from 'motion/react';
 import logo from './images/logo.png';
 import amazonLogo from './images/amazon.webp';
 import capgeminiLogo from './images/capgemini.webp';
@@ -62,6 +62,63 @@ import coursesImg from './images/courses.png';
 import contactUsImg from './images/contactus.png';
 import careersImg from './images/careers.png';
 import whoweareImg from './images/whoweare.png';
+import gaboutImg from './images/gabout.png';
+
+// --- CountUp Animation Component ---
+export const CountUp = ({ value, duration = 1.5 }: { value: string; duration?: number }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  if (value === '24/7') {
+    const motionValue = useMotionValue(0);
+    const rounded = useTransform(motionValue, (latest) => Math.round(latest).toString());
+    useEffect(() => {
+      if (isInView) {
+        const controls = animate(motionValue, 24, { duration, ease: "easeOut" });
+        return controls.stop;
+      }
+    }, [isInView, motionValue, duration]);
+    return <span ref={ref}><motion.span>{rounded}</motion.span>/7</span>;
+  }
+
+  const match = value.match(/^([^\d]*)([\d.]+)([^\d]*)$/);
+  if (!match) {
+    return <span ref={ref}>{value}</span>;
+  }
+
+  const prefix = match[1];
+  const numericStr = match[2];
+  const suffix = match[3];
+  const numericValue = parseFloat(numericStr);
+
+  const motionValue = useMotionValue(0);
+  const rounded = useTransform(motionValue, (latest) => {
+    if (numericStr.includes('.')) {
+      const decimals = numericStr.split('.')[1].length;
+      return latest.toFixed(decimals);
+    }
+    return Math.round(latest).toString();
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(motionValue, numericValue, {
+        duration: duration,
+        ease: "easeOut",
+      });
+      return controls.stop;
+    }
+  }, [isInView, motionValue, numericValue, duration]);
+
+  return (
+    <span ref={ref}>
+      {prefix}
+      <motion.span>{rounded}</motion.span>
+      {suffix}
+    </span>
+  );
+};
+
 // --- Navbar ---
 const Navbar = ({ activePage, setActivePage, onTalkToCounselor, isDarkMode, toggleDarkMode }: { activePage: string, setActivePage: (page: string) => void, onTalkToCounselor: () => void, isDarkMode: boolean, toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -202,7 +259,7 @@ const AboutHero = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
               transition={{ repeat: Infinity, duration: 4 }}
               className="absolute -top-10 -right-4 md:-right-10 bg-white p-6 rounded-3xl shadow-xl shadow-blue-500/10 z-20 border border-slate-50"
             >
-              <div className="text-2xl md:text-3xl font-heading font-black text-[#0057FF]">500+</div>
+              <div className="text-2xl md:text-3xl font-heading font-black text-[#0057FF]"><CountUp value="500+" /></div>
               <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-tight">Students Trained</div>
             </motion.div>
 
@@ -211,7 +268,7 @@ const AboutHero = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
               transition={{ repeat: Infinity, duration: 5 }}
               className="absolute top-1/2 -right-8 md:-right-16 bg-white p-6 rounded-3xl shadow-xl shadow-blue-500/10 z-20 border border-slate-50"
             >
-              <div className="text-2xl md:text-3xl font-heading font-black text-[#0057FF]">200+</div>
+              <div className="text-2xl md:text-3xl font-heading font-black text-[#0057FF]"><CountUp value="98%" /></div>
               <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-tight">Placements</div>
             </motion.div>
 
@@ -220,8 +277,8 @@ const AboutHero = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
               transition={{ repeat: Infinity, duration: 3.5 }}
               className="absolute -bottom-10 right-0 bg-white p-6 rounded-3xl shadow-xl shadow-blue-500/10 z-20 border border-slate-50"
             >
-              <div className="text-2xl md:text-3xl font-heading font-black text-[#0057FF]">500+</div>
-              <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-tight">MNC Placements</div>
+              <div className="text-2xl md:text-3xl font-heading font-black text-[#0057FF]"><CountUp value="4.9 ★" /></div>
+              <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-tight">Student Rating</div>
             </motion.div>
           </div>
         </div>
@@ -521,7 +578,7 @@ const OfficeSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => void })
           <div className="relative">
             <div className="bg-slate-100 rounded-[3rem] aspect-square md:aspect-video overflow-hidden shadow-2xl relative border-8 border-white">
               <img
-                src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?auto=format&fit=crop&q=80&w=1200"
+                src={gaboutImg}
                 alt="Map Location"
                 className="w-full h-full object-cover opacity-60 grayscale"
               />
@@ -1117,8 +1174,8 @@ const PlacementsHero = () => {
             <div className="grid grid-cols-3 gap-8 md:gap-12">
               {[
                 { val: '500+', label: 'Students Trained', icon: <Users size={20} />, color: 'blue' },
-                { val: '200+', label: 'Successful Placements', icon: <Trophy size={20} />, color: 'cyan' },
-                { val: '98%', label: 'Placement Rate', icon: <BarChart size={20} />, color: 'indigo' }
+                { val: '98%', label: 'Successful Placements', icon: <Trophy size={20} />, color: 'cyan' },
+                { val: '4.9 ★', label: 'Rating', icon: <BarChart size={20} />, color: 'indigo' }
               ].map((stat, i) => (
                 <motion.div
                   key={i}
@@ -1130,7 +1187,7 @@ const PlacementsHero = () => {
                   <div className="flex items-center gap-2 text-slate-400">
                     {stat.icon}
                   </div>
-                  <span className="text-3xl md:text-4xl font-heading font-black text-slate-900 tracking-tighter">{stat.val}</span>
+                  <span className="text-3xl md:text-4xl font-heading font-black text-slate-900 tracking-tighter"><CountUp value={stat.val} /></span>
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-tight">{stat.label}</span>
                 </motion.div>
               ))}
@@ -1311,9 +1368,9 @@ const PlacementHighlightsBanner = () => {
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
             {[
               { val: '500+', label: 'Students Trained', icon: <Users size={36} strokeWidth={2.5} /> },
-              { val: '200+', label: 'Successful Placements', icon: <Trophy size={36} strokeWidth={2.5} /> },
-              { val: '500+', label: 'Successful Placements', icon: <Building size={36} strokeWidth={2.5} /> },
-              { val: '98%', label: 'Placement Rate', icon: <CheckCircle2 size={36} strokeWidth={2.5} /> }
+              { val: '500+', label: 'Successful Placements', icon: <Trophy size={36} strokeWidth={2.5} /> },
+              { val: '10+', label: 'Hiring Partners', icon: <Building size={36} strokeWidth={2.5} /> },
+              { val: '98%', label: 'Placement Success Rate', icon: <CheckCircle2 size={36} strokeWidth={2.5} /> }
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -1326,7 +1383,7 @@ const PlacementHighlightsBanner = () => {
                   {stat.icon}
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl font-heading font-black mb-2 tracking-tighter">{stat.val}</span>
+                  <span className="text-4xl md:text-5xl font-heading font-black mb-2 tracking-tighter"><CountUp value={stat.val} /></span>
                   <span className="text-[11px] font-black uppercase tracking-[0.2em] text-blue-100/70 text-center">{stat.label}</span>
                 </div>
               </motion.div>
@@ -1617,20 +1674,20 @@ const Hero = ({ onNavigate, onTalkToCounselor }: { onNavigate: (page: string) =>
             {/* Statistics Bar - Exactly as per user-provided images (Desktop) */}
             <div className="hidden lg:grid grid-cols-3 bg-white border border-slate-100 rounded-[2rem] py-8 px-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)]">
               <div className="text-center">
-                <div className="text-5xl font-heading font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0057FF] to-[#00C4CC] mb-2 line-height-none tracking-tight">500+</div>
+                <div className="text-5xl font-heading font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0057FF] to-[#00C4CC] mb-2 line-height-none tracking-tight"><CountUp value="500+" /></div>
                 <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">Students Trained</div>
               </div>
               <div className="flex items-center justify-center">
                 <div className="h-12 w-[1px] bg-slate-100"></div>
                 <div className="flex-1 text-center">
-                  <div className="text-5xl font-heading font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0057FF] to-[#00C4CC] mb-2 line-height-none tracking-tight">200+</div>
+                  <div className="text-5xl font-heading font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0057FF] to-[#00C4CC] mb-2 line-height-none tracking-tight"><CountUp value="500+" /></div>
                   <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">Successful Placements</div>
                 </div>
                 <div className="h-12 w-[1px] bg-slate-100"></div>
               </div>
               <div className="text-center">
-                <div className="text-5xl font-heading font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0057FF] to-[#00C4CC] mb-2 line-height-none tracking-tight">500+</div>
-                <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">MNC Placements</div>
+                <div className="text-5xl font-heading font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0057FF] to-[#00C4CC] mb-2 line-height-none tracking-tight"><CountUp value="98%" /></div>
+                <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">Placement Success Rate</div>
               </div>
             </div>
 
@@ -1638,22 +1695,22 @@ const Hero = ({ onNavigate, onTalkToCounselor }: { onNavigate: (page: string) =>
             <div className="lg:hidden w-full max-w-sm mx-auto mb-10">
               <div className="bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.05)] flex flex-col items-center">
                 <div className="w-full text-center py-6">
-                  <div className="text-4xl font-heading font-black text-primary mb-2 tracking-tight">500+</div>
+                  <div className="text-4xl font-heading font-black text-primary mb-2 tracking-tight"><CountUp value="500+" /></div>
                   <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">Students Trained</div>
                 </div>
 
                 <div className="w-full h-[1px] bg-slate-100 my-2"></div>
 
                 <div className="w-full text-center py-6">
-                  <div className="text-4xl font-heading font-black text-primary mb-2 tracking-tight">200+</div>
+                  <div className="text-4xl font-heading font-black text-primary mb-2 tracking-tight"><CountUp value="500+" /></div>
                   <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">Successful Placements</div>
                 </div>
 
                 <div className="w-full h-[1px] bg-slate-100 my-2"></div>
 
                 <div className="w-full text-center py-6">
-                  <div className="text-4xl font-heading font-black text-primary mb-2 tracking-tight">500+</div>
-                  <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">MNC Placements</div>
+                  <div className="text-4xl font-heading font-black text-primary mb-2 tracking-tight"><CountUp value="98%" /></div>
+                  <div className="text-[11px] text-slate-500 font-black uppercase tracking-widest leading-none">Placement Success Rate</div>
                 </div>
               </div>
             </div>
@@ -1964,9 +2021,9 @@ const PopularCourses = ({ onOpenCourse, onNavigate }: { onOpenCourse: (c: any) =
 const PlacementSuccess = () => {
   const stats = [
     { label: 'Students Trained', value: '500+', icon: <Users size={32} /> },
-    { label: 'Success Stories', value: '200+', icon: <Award size={32} /> },
-    { label: 'MNC Placements', value: '500+', icon: <Briefcase size={32} /> },
-    { label: 'Placement Rate', value: '98%', icon: <Sparkles size={32} /> },
+    { label: 'Successful Placements', value: '500+', icon: <Award size={32} /> },
+    { label: 'Hiring Partners', value: '10+', icon: <Briefcase size={32} /> },
+    { label: 'Placement Success Rate', value: '98%', icon: <Sparkles size={32} /> },
   ];
 
   return (
@@ -1988,7 +2045,7 @@ const PlacementSuccess = () => {
                   {stat.icon}
                 </div>
                 <div className="text-4xl md:text-5xl font-heading font-black text-white mb-2 tracking-tighter drop-shadow-md">
-                  {stat.value}
+                  <CountUp value={stat.value} />
                 </div>
                 <p className="text-[10px] md:text-[11px] font-black text-cyan-50/70 uppercase tracking-[0.3em] px-2 leading-tight">
                   {stat.label}
@@ -2991,9 +3048,8 @@ const ContactHero = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) =
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + (i * 0.1) }}
                   onClick={item.onClick}
-                  className={`bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all ${
-                    item.onClick ? 'cursor-pointer hover:border-blue-200' : ''
-                  }`}
+                  className={`bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all ${item.onClick ? 'cursor-pointer hover:border-blue-200' : ''
+                    }`}
                 >
                   <div className="text-blue-600 mb-3">{item.icon}</div>
                   <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</div>
@@ -3908,32 +3964,28 @@ const CallSelectionModal = ({ isOpen, onClose, isDarkMode }: { isOpen: boolean, 
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          className={`relative w-full max-w-md overflow-hidden rounded-[32px] shadow-2xl p-8 md:p-10 text-center border transition-colors duration-300 ${
-            isDarkMode 
-              ? 'bg-slate-900 border-slate-800 text-white shadow-blue-900/20' 
-              : 'bg-white border-slate-100 text-slate-900 shadow-blue-500/20'
-          }`}
+          className={`relative w-full max-w-md overflow-hidden rounded-[32px] shadow-2xl p-8 md:p-10 text-center border transition-colors duration-300 ${isDarkMode
+            ? 'bg-slate-900 border-slate-800 text-white shadow-blue-900/20'
+            : 'bg-white border-slate-100 text-slate-900 shadow-blue-500/20'
+            }`}
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className={`absolute top-6 right-6 transition-colors ${
-              isDarkMode ? 'text-slate-500 hover:text-slate-300' : 'text-slate-400 hover:text-slate-600'
-            }`}
+            className={`absolute top-6 right-6 transition-colors ${isDarkMode ? 'text-slate-500 hover:text-slate-300' : 'text-slate-400 hover:text-slate-600'
+              }`}
           >
             <X size={20} />
           </button>
 
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md ${
-            isDarkMode ? 'bg-blue-950 text-blue-400' : 'bg-blue-50 text-blue-600'
-          }`}>
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md ${isDarkMode ? 'bg-blue-950 text-blue-400' : 'bg-blue-50 text-blue-600'
+            }`}>
             <Phone size={28} />
           </div>
 
           <h3 className="text-2xl font-heading font-black mb-2">Connect With Us</h3>
-          <p className={`text-sm font-medium mb-8 leading-relaxed ${
-            isDarkMode ? 'text-slate-400' : 'text-slate-500'
-          }`}>
+          <p className={`text-sm font-medium mb-8 leading-relaxed ${isDarkMode ? 'text-slate-400' : 'text-slate-500'
+            }`}>
             Please choose one of the numbers below to call our counselor.
           </p>
 
@@ -3958,28 +4010,24 @@ const CallSelectionModal = ({ isOpen, onClose, isDarkMode }: { isOpen: boolean, 
             {/* Secondary Number */}
             <a
               href="tel:+14695189938"
-              className={`flex items-center justify-between p-5 rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all group border ${
-                isDarkMode 
-                  ? 'bg-slate-800 border-slate-700 text-white hover:bg-slate-750' 
-                  : 'bg-slate-50 border-slate-100 text-slate-900 hover:bg-slate-100'
-              }`}
+              className={`flex items-center justify-between p-5 rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all group border ${isDarkMode
+                ? 'bg-slate-800 border-slate-700 text-white hover:bg-slate-750'
+                : 'bg-slate-50 border-slate-100 text-slate-900 hover:bg-slate-100'
+                }`}
             >
               <div className="flex items-center gap-4 text-left">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                  isDarkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-200 text-slate-600'
-                }`}>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isDarkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-200 text-slate-600'
+                  }`}>
                   <Phone size={18} />
                 </div>
                 <div>
                   <div className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 text-slate-400">Secondary Number</div>
-                  <div className={`text-base font-bold ${
-                    isDarkMode ? 'text-slate-200' : 'text-slate-800'
-                  }`}>+1 (469) 518-9938</div>
+                  <div className={`text-base font-bold ${isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                    }`}>+1 (469) 518-9938</div>
                 </div>
               </div>
-              <ArrowRight size={18} className={`group-hover:translate-x-1 transition-transform ${
-                isDarkMode ? 'text-slate-500' : 'text-slate-400'
-              }`} />
+              <ArrowRight size={18} className={`group-hover:translate-x-1 transition-transform ${isDarkMode ? 'text-slate-500' : 'text-slate-400'
+                }`} />
             </a>
           </div>
         </motion.div>

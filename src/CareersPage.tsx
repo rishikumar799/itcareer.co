@@ -19,6 +19,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import careersImg from './images/careers.png';
+import { CountUp } from './App';
 
 interface CareersPageProps {
   onNavigate: (page: string) => void;
@@ -537,7 +538,7 @@ export const CareersPage = ({ onNavigate: _onNavigate, onTalkToCounselor: _onTal
               <div className="relative z-10 rounded-[3rem] overflow-hidden border-8 border-slate-50 aspect-[4/3] shadow-2xl shadow-blue-900/10">
                 <img src={careersImg} alt="Our Team Working" className="w-full h-full object-cover" />
                 {/* Badge inside right side of image */}
-                <div className="absolute top-5 right-4 bg-gradient-to-r from-[#0057FF]/90 to-[#00C4CC]/90 backdrop-blur-md text-white text-[11px] font-black px-4 py-2 rounded-2xl shadow-lg z-20 max-w-[180px] text-center leading-tight">
+                <div className="absolute top-5 left-4 bg-gradient-to-r from-[#0057FF]/90 to-[#00C4CC]/90 backdrop-blur-md text-white text-[11px] font-black px-4 py-2 rounded-2xl shadow-lg z-20 max-w-[180px] text-center leading-tight">
                   🚀 Let's build something amazing together!
                 </div>
               </div>
@@ -547,7 +548,7 @@ export const CareersPage = ({ onNavigate: _onNavigate, onTalkToCounselor: _onTal
                 transition={{ repeat: Infinity, duration: 4 }}
                 className="absolute -top-6 -right-4 md:-right-8 bg-white p-5 rounded-3xl shadow-xl shadow-blue-500/10 z-20 border border-slate-50"
               >
-                <div className="text-2xl font-heading font-black text-[#0057FF]">20+</div>
+                <div className="text-2xl font-heading font-black text-[#0057FF]"><CountUp value="20+" /></div>
                 <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-tight">Open Roles</div>
               </motion.div>
 
@@ -556,7 +557,7 @@ export const CareersPage = ({ onNavigate: _onNavigate, onTalkToCounselor: _onTal
                 transition={{ repeat: Infinity, duration: 5 }}
                 className="absolute -bottom-6 -left-4 md:-left-8 bg-white p-5 rounded-3xl shadow-xl shadow-blue-500/10 z-20 border border-slate-50"
               >
-                <div className="text-2xl font-heading font-black text-[#00C4CC]">100%</div>
+                <div className="text-2xl font-heading font-black text-[#00C4CC]"><CountUp value="100%" /></div>
                 <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-tight">Remote Friendly</div>
               </motion.div>
             </motion.div>
