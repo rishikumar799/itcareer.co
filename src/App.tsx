@@ -462,7 +462,7 @@ const Mentors = () => {
   );
 };
 
-const OfficeSection = () => {
+const OfficeSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) => {
   return (
     <section className="py-16 bg-white border-t border-slate-50">
       <div className="section-container">
@@ -485,7 +485,12 @@ const OfficeSection = () => {
               </div>
               <div>
                 <h4 className="font-heading font-black text-slate-900 text-[11px] uppercase tracking-widest mb-2">Call Us</h4>
-                <p className="text-slate-500 font-extrabold text-base md:text-lg">+1 469 518 9938</p>
+                <button
+                  onClick={onTalkToCounselor}
+                  className="text-slate-500 hover:text-blue-600 transition-colors font-extrabold text-base md:text-lg text-left"
+                >
+                  +1 (945) 732-9000
+                </button>
               </div>
             </div>
             <div className="flex items-start gap-6">
@@ -673,7 +678,7 @@ const ServicesPage = ({ onNavigate, onTalkToCounselor, onOpenCourse }: { onNavig
       <ServicesHero onNavigate={onNavigate} />
       <TechnologySuite />
       <SpecializedCareerPrograms onOpenCourse={onOpenCourse} />
-      <MethodologySection onOpenCourse={onOpenCourse} />
+      <MethodologySection onOpenCourse={onOpenCourse} onTalkToCounselor={onTalkToCounselor} />
       <EnterpriseSoftwareDevelopmentServices onOpenCourse={onOpenCourse} />
       <GlobalReach />
       <ServicesWhyChoose />
@@ -719,7 +724,7 @@ const TechnologySuite = () => {
   );
 };
 
-const MethodologySection = ({ onOpenCourse }: { onOpenCourse: (c: any) => void }) => {
+const MethodologySection = ({ onOpenCourse, onTalkToCounselor }: { onOpenCourse: (c: any) => void, onTalkToCounselor: () => void }) => {
   const points = [
     { title: 'Agile Delivery', desc: 'Frequent updates and iterative improvements for software solutions.' },
     { title: 'Learn-by-Doing', desc: 'Practical, hands-on training methodology for student success.' },
@@ -747,7 +752,7 @@ const MethodologySection = ({ onOpenCourse }: { onOpenCourse: (c: any) => void }
                   Learn More
                 </button>
                 <button
-                  onClick={() => window.location.href = 'tel:+14695189938'}
+                  onClick={onTalkToCounselor}
                   className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all shadow-xl"
                 >
                   <Phone size={20} />
@@ -1127,14 +1132,14 @@ const WhyChooseCourses = () => {
   );
 };
 
-const CoursesPage = ({ onOpenCourse, onNavigate }: { onOpenCourse: (c: any) => void, onNavigate: (page: string) => void }) => {
+const CoursesPage = ({ onOpenCourse, onNavigate, onTalkToCounselor }: { onOpenCourse: (c: any) => void, onNavigate: (page: string) => void, onTalkToCounselor: () => void }) => {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <CoursesHero />
       <DetailedCoursesGrid onOpenCourse={onOpenCourse} />
       <WhatYouWillLearn />
       <WhyChooseCourses />
-      <CTA onNavigate={onNavigate} onTalkToCounselor={() => window.location.href = 'tel:+14695189938'} />
+      <CTA onNavigate={onNavigate} onTalkToCounselor={onTalkToCounselor} />
     </motion.div>
   );
 };
@@ -1392,36 +1397,52 @@ const PlacementHighlightsBanner = () => {
 const StudentSuccessStories = () => {
   const stories = [
     {
-      name: 'Rohit Sharma',
-      role: 'Java Developer',
-      company: 'TCS',
-      logo: 'https://itcareer.co/assets/tcs%20logo-DKOcZvqu.png',
-      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&mouth=smile&backgroundColor=b6e3f4',
-      quote: 'ITCareer gave me the skills and confidence to crack interviews. The mentors are amazing and supportive.'
-    },
-    {
-      name: 'Neha Patel',
-      role: 'Data Engineer',
-      company: 'Infosys',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg',
-      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka&mouth=smile&backgroundColor=ffdfbf',
-      quote: 'The training, mock interviews and placement support were excellent. I\'m glad I chose ITCareer'
-    },
-    {
-      name: 'Arjun Verma',
+      name: 'Gamya D',
       role: 'Software Engineer',
+      company: 'Walmart',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg',
+      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gamya&mouth=smile&backgroundColor=b6e3f4',
+      quote: 'The training and placement support at ITCareer were exceptional. Secured a role at Walmart!'
+    },
+    {
+      name: 'Dinesh V',
+      role: 'DevOps Engineer',
+      company: 'American Airlines',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/American_Airlines_logo_2013.svg',
+      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dinesh&mouth=smile&backgroundColor=ffdfbf',
+      quote: 'Securing a job at American Airlines was a dream come true. The mock interviews were extremely helpful.'
+    },
+    {
+      name: 'Doniya J',
+      role: 'Java Developer',
       company: 'Cognizant',
       logo: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg',
-      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun&mouth=smile&backgroundColor=c0afef',
-      quote: 'From learning to placement, the entire journey was smooth and well-guided.'
+      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Doniya&mouth=smile&backgroundColor=c0afef',
+      quote: 'The hands-on project experience helped me clear the interviews at Cognizant easily.'
     },
     {
-      name: 'Pooja Singh',
-      role: 'QA Engineer',
-      company: 'Wipro',
-      logo: 'https://itcareer.co/assets/wiprologo-2q50LlX3.png',
-      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sara&mouth=smile&backgroundColor=d1d4f9',
-      quote: 'The practical training and real-world projects helped me get placed in a top MNC.'
+      name: '',
+      role: 'Software Engineer',
+      company: 'Workday',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Workday_Logo.svg',
+      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Workday&mouth=smile&backgroundColor=d1d4f9',
+      quote: 'Secured a placement at Workday. The curriculum is highly aligned with industry standards.'
+    },
+    {
+      name: '',
+      role: 'Data Engineer',
+      company: 'Elevance Health',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Elevance_Health_Logo.svg/512px-Elevance_Health_Logo.svg.png',
+      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Elevance&mouth=smile&backgroundColor=ffd5dc',
+      quote: 'Secured a placement at Elevance Health. Great mentors and outstanding career guidance.'
+    },
+    {
+      name: '',
+      role: 'Cloud Engineer',
+      company: 'UBS Bank',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/UBS_logo.svg',
+      img: 'https://api.dicebear.com/7.x/avataaars/svg?seed=UBS&mouth=smile&backgroundColor=b6e3f4',
+      quote: 'Secured a placement at UBS Bank. The practice labs and mock tests build solid foundation.'
     }
   ];
 
@@ -1434,7 +1455,7 @@ const StudentSuccessStories = () => {
         </div>
 
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
             {stories.map((s, i) => (
               <motion.div
                 key={i}
@@ -1443,10 +1464,10 @@ const StudentSuccessStories = () => {
               >
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-14 h-14 rounded-full overflow-hidden bg-slate-50 border-2 border-white shadow-sm ring-1 ring-slate-100">
-                    <img src={s.img} alt={s.name} className="w-full h-full object-cover" />
+                    <img src={s.img} alt={s.name || s.company} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-heading font-black text-slate-900 text-[13px] leading-tight mb-1">{s.name}</h4>
+                    <h4 className="font-heading font-black text-slate-900 text-[13px] leading-tight mb-1">{s.name || '\u00A0'}</h4>
                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-2">{s.role}</p>
                     <div className="h-4 flex items-center">
                       <img src={s.logo} alt={s.company} className="h-full w-auto" />
@@ -1579,7 +1600,7 @@ const AboutPage = ({ onNavigate, onTalkToCounselor, onOpenCourse }: { onNavigate
       <PlacementSuccess />
       <Testimonials />
       <Mentors />
-      <OfficeSection />
+      <OfficeSection onTalkToCounselor={onTalkToCounselor} />
       <CTA onNavigate={onNavigate} onTalkToCounselor={onTalkToCounselor} />
     </motion.div>
   );
@@ -2054,40 +2075,40 @@ const PlacementSuccess = () => {
 const Testimonials = () => {
   const testimonials = [
     {
-      name: 'Ritik Sharma',
-      role: 'Full Stack Developer',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ritik&mouth=smile&backgroundColor=b6e3f4',
-      text: 'ITCareer gave me the skills and confidence to crack my dream job. The mentors are amazing!'
+      name: 'Gamya D',
+      role: 'Placed at Walmart',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gamya&mouth=smile&backgroundColor=b6e3f4',
+      text: 'ITCareer gave me the skills and confidence to crack my dream job. Extremely grateful for the training and guidance that led to my role at Walmart!'
     },
     {
-      name: 'Anjali Verma',
-      role: 'SDE at Accenture',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anjali&mouth=smile&backgroundColor=ffdfbf',
-      text: 'The real-world projects and placement support are top-notch. Highly recommended!'
+      name: 'Dinesh V',
+      role: 'Placed at American Airlines',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dinesh&mouth=smile&backgroundColor=ffdfbf',
+      text: 'The real-world projects and placement support are top-notch. Secured a position at American Airlines, highly recommend their programs!'
     },
     {
-      name: 'Vikram Singh',
-      role: 'Backend Engineer',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram&mouth=smile&backgroundColor=c0afef',
-      text: 'I went from zero to hero in 6 months. Thanks to ITCareer!'
+      name: 'Doniya J',
+      role: 'Placed at Cognizant',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Doniya&mouth=smile&backgroundColor=c0afef',
+      text: 'From learning to placement, the entire journey was smooth and well-guided. Placed at Cognizant as a Java Developer!'
     },
     {
-      name: 'Sahil Kapoor',
-      role: 'Frontend Developer',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sahil&mouth=smile&backgroundColor=d1d4f9',
-      text: 'Best coding platform for beginners. The curriculum is very industry focused.'
+      name: '',
+      role: 'Placed at Workday',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Workday&mouth=smile&backgroundColor=d1d4f9',
+      text: 'Outstanding support and learning resources. Placed at Workday thanks to the guidance of the mentors here.'
     },
     {
-      name: 'Priya Das',
-      role: 'Data Scientist',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Priya&mouth=smile&backgroundColor=ffd5dc',
-      text: 'The career guidance here is excellent. It is not just about code, but the whole professional journey.'
+      name: '',
+      role: 'Placed at Elevance Health',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Elevance&mouth=smile&backgroundColor=ffd5dc',
+      text: 'The career guidance and preparation labs are outstanding. Secured my placement at Elevance Health.'
     },
     {
-      name: 'Rahul Mehta',
-      role: 'Systems Engineer',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul&mouth=smile&backgroundColor=b6e3f4',
-      text: 'Solid foundation in DSA and system design. Exactly what you need for top-tier interviews.'
+      name: '',
+      role: 'Placed at UBS Bank',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=UBS&mouth=smile&backgroundColor=b6e3f4',
+      text: 'Solid foundation and deep practical understanding. Secured a role at UBS Bank.'
     }
   ];
 
@@ -2196,10 +2217,10 @@ const Testimonials = () => {
                         <div className="flex flex-col gap-5">
                           <div className="flex items-center gap-4">
                             <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-transform duration-500 group-hover:scale-105">
-                              <img src={t.image} alt={t.name} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                              <img src={t.image} alt={t.name || t.role} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                             </div>
                             <div className="min-w-0">
-                              <h5 className="font-heading font-black text-slate-900 text-base leading-none mb-1.5 truncate">{t.name}</h5>
+                              <h5 className="font-heading font-black text-slate-900 text-base leading-none mb-1.5 truncate">{t.name || '\u00A0'}</h5>
                               <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest truncate">{t.role}</p>
                             </div>
                           </div>
@@ -2863,7 +2884,7 @@ const TermsConditionsPage = () => {
 };
 
 const WhatsAppButton = () => {
-  const phoneNumber = "14695189938";
+  const phoneNumber = "19457329000";
   const message = encodeURIComponent("Hello! I wanna know more about the courses and services at ITCareer.");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
@@ -2991,7 +3012,7 @@ const Footer = ({ onNavigate, isDarkMode }: { onNavigate: (page: string) => void
 };
 
 // --- Contact Page Components ---
-const ContactHero = () => {
+const ContactHero = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) => {
   return (
     <section className="relative pt-12 md:pt-20 pb-20 overflow-hidden bg-white">
       {/* Abstract Background Shapes */}
@@ -3015,7 +3036,7 @@ const ContactHero = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
-                { icon: <Phone size={20} />, label: 'Call Us', val: '+1 469 518 9938' },
+                { icon: <Phone size={20} />, label: 'Call Us', val: '+1 (945) 732-9000', onClick: onTalkToCounselor },
                 { icon: <Mail size={20} />, label: 'Email Us', val: 'info@itcareer.co' },
                 { icon: <Clock size={20} />, label: 'Office Hours', val: 'Mon - Sat: 9AM - 7PM' }
               ].map((item, i) => (
@@ -3024,7 +3045,10 @@ const ContactHero = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + (i * 0.1) }}
-                  className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+                  onClick={item.onClick}
+                  className={`bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all ${
+                    item.onClick ? 'cursor-pointer hover:border-blue-200' : ''
+                  }`}
                 >
                   <div className="text-blue-600 mb-3">{item.icon}</div>
                   <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</div>
@@ -3072,7 +3096,7 @@ const ContactHero = () => {
   );
 };
 
-const ContactFormSection = () => {
+const ContactFormSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) => {
   const handleContactSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -3084,7 +3108,7 @@ const ContactFormSection = () => {
 
     const waText = `🌟 *New Contact Inquiry from itcareer.co* 🌟\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📱 *Phone:* ${phone}\n📌 *Subject:* ${subject}\n💬 *Message:* ${message}`;
     const encodedText = encodeURIComponent(waText);
-    const whatsappUrl = `https://wa.me/14695189938?text=${encodedText}`;
+    const whatsappUrl = `https://wa.me/19457329000?text=${encodedText}`;
 
     window.open(whatsappUrl, '_blank');
   };
@@ -3169,17 +3193,17 @@ const ContactFormSection = () => {
                 <h2 className="text-2xl md:text-3xl font-heading font-black text-slate-900 mb-10 tracking-tight">Get in Touch</h2>
                 <div className="space-y-8">
                   {[
-                    { icon: <Phone size={24} />, label: 'Phone', val: '+1 469 518 9938' },
+                    { icon: <Phone size={24} />, label: 'Phone', val: '+1 (945) 732-9000', onClick: onTalkToCounselor },
                     { icon: <Mail size={24} />, label: 'Email', val: 'info@itcareer.co' },
                     { icon: <MapPin size={24} />, label: 'Office Address', val: '3401 Cluster Road Suite #164, Plano, Texas 75023' }
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-6 group">
+                    <div key={i} className={`flex gap-6 group ${item.onClick ? 'cursor-pointer' : ''}`} onClick={item.onClick}>
                       <div className="w-14 h-14 bg-white text-blue-600 rounded-2xl flex items-center justify-center border border-slate-100 shadow-sm group-hover:scale-110 transition-transform">
                         {item.icon}
                       </div>
                       <div className="flex-1">
                         <div className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</div>
-                        <div className="text-sm font-bold text-slate-900">{item.val}</div>
+                        <div className={`text-sm font-bold text-slate-900 ${item.onClick ? 'group-hover:text-blue-600 transition-colors' : ''}`}>{item.val}</div>
                       </div>
                     </div>
                   ))}
@@ -3277,7 +3301,7 @@ const WhyContact = () => {
   );
 };
 
-const FAQSection = () => {
+const FAQSection = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) => {
   const faqs = [
     { q: 'What courses do you offer?', a: 'We offer a wide range of IT courses including Java Development, Data Engineering, DevOps, and more.' },
     { q: 'Are the courses beginner-friendly?', a: 'Yes, our courses are designed to take you from absolute basics to advanced professional levels.' },
@@ -3330,7 +3354,7 @@ const FAQSection = () => {
               <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">Still have questions?</h4>
               <div className="flex gap-4">
                 <div className="text-[11px] font-bold text-slate-500">
-                  Call us at <span className="text-blue-600 font-black">+1 469 518 9938</span>
+                  Call us at <button onClick={onTalkToCounselor} className="text-blue-600 font-black hover:underline transition-colors">+1 (945) 732-9000</button>
                 </div>
                 <div className="w-px h-4 bg-slate-200 hidden md:block"></div>
                 <div className="text-[11px] font-bold text-slate-500">
@@ -3469,7 +3493,7 @@ const ApplyNowHero = () => {
   );
 };
 
-const ApplyNowForm = () => {
+const ApplyNowForm = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) => {
   const handleApplySubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -3484,7 +3508,7 @@ const ApplyNowForm = () => {
 
     const waText = `🎓 *New Student Application from itcareer.co* 🎓\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📱 *Phone:* ${countryCode} ${phone}\n📚 *Course:* ${course}\n🎓 *Qualification:* ${qualification}\n📅 *Graduation Year:* ${gradYear}\n⏰ *Batch Time:* ${batchTime}`;
     const encodedText = encodeURIComponent(waText);
-    const whatsappUrl = `https://wa.me/14695189938?text=${encodedText}`;
+    const whatsappUrl = `https://wa.me/19457329000?text=${encodedText}`;
 
     window.open(whatsappUrl, '_blank');
   };
@@ -3701,12 +3725,15 @@ const ApplyNowForm = () => {
                 Our admission counselors are here to help you choose the right course.
               </p>
               <div className="space-y-6 mb-10">
-                <div className="flex items-center gap-4">
+                <button
+                  onClick={onTalkToCounselor}
+                  className="flex items-center gap-4 hover:opacity-80 transition-opacity text-left"
+                >
                   <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
                     <Phone size={18} />
                   </div>
-                  <span className="text-xs font-black">+1 469 518 9938</span>
-                </div>
+                  <span className="text-xs font-black">+1 (945) 732-9000</span>
+                </button>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
                     <Mail size={18} />
@@ -3714,7 +3741,10 @@ const ApplyNowForm = () => {
                   <span className="text-xs font-black">info@itcareer.co</span>
                 </div>
               </div>
-              <button className="w-full py-4 bg-white text-[#0057FF] rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-blue-900/10">
+              <button
+                onClick={onTalkToCounselor}
+                className="w-full py-4 bg-white text-[#0057FF] rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-blue-900/10"
+              >
                 Talk to Counselor →
               </button>
             </div>
@@ -3806,11 +3836,11 @@ const ContactPage = ({ onNavigate, onTalkToCounselor }: { onNavigate: (page: str
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <ContactHero />
-      <ContactFormSection />
+      <ContactHero onTalkToCounselor={onTalkToCounselor} />
+      <ContactFormSection onTalkToCounselor={onTalkToCounselor} />
       <ContactLocation />
       <WhyContact />
-      <FAQSection />
+      <FAQSection onTalkToCounselor={onTalkToCounselor} />
       <CTA onNavigate={onNavigate} onTalkToCounselor={onTalkToCounselor} />
     </motion.div>
   );
@@ -3824,7 +3854,7 @@ const ApplyNowPage = ({ onNavigate, onTalkToCounselor }: { onNavigate: (page: st
       exit={{ opacity: 0 }}
     >
       <ApplyNowHero />
-      <ApplyNowForm />
+      <ApplyNowForm onTalkToCounselor={onTalkToCounselor} />
       <WhatHappensAfterApply />
       <CTA onNavigate={onNavigate} onTalkToCounselor={onTalkToCounselor} />
     </motion.div>
@@ -3847,7 +3877,7 @@ const CourseDetailModal = ({ course, isOpen, onClose, onNavigate }: { course: an
 
     const waText = `📚 *New Course Inquiry: ${course.title}* \n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📱 *Phone:* ${phone}\n🔍 *Heard from:* ${source}\n🏛 *Site:* itcareer.co`;
     const encodedText = encodeURIComponent(waText);
-    window.open(`https://wa.me/14695189938?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/19457329000?text=${encodedText}`, '_blank');
   };
 
   return (
@@ -3937,17 +3967,115 @@ const CourseDetailModal = ({ course, isOpen, onClose, onNavigate }: { course: an
   );
 };
 
+const CallSelectionModal = ({ isOpen, onClose, isDarkMode }: { isOpen: boolean, onClose: () => void, isDarkMode: boolean }) => {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 md:p-6">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+        />
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.95, opacity: 0, y: 20 }}
+          className={`relative w-full max-w-md overflow-hidden rounded-[32px] shadow-2xl p-8 md:p-10 text-center border transition-colors duration-300 ${
+            isDarkMode 
+              ? 'bg-slate-900 border-slate-800 text-white shadow-blue-900/20' 
+              : 'bg-white border-slate-100 text-slate-900 shadow-blue-500/20'
+          }`}
+        >
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className={`absolute top-6 right-6 transition-colors ${
+              isDarkMode ? 'text-slate-500 hover:text-slate-300' : 'text-slate-400 hover:text-slate-600'
+            }`}
+          >
+            <X size={20} />
+          </button>
+
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md ${
+            isDarkMode ? 'bg-blue-950 text-blue-400' : 'bg-blue-50 text-blue-600'
+          }`}>
+            <Phone size={28} />
+          </div>
+
+          <h3 className="text-2xl font-heading font-black mb-2">Connect With Us</h3>
+          <p className={`text-sm font-medium mb-8 leading-relaxed ${
+            isDarkMode ? 'text-slate-400' : 'text-slate-500'
+          }`}>
+            Please choose one of the numbers below to call our counselor.
+          </p>
+
+          <div className="space-y-4">
+            {/* Primary Number */}
+            <a
+              href="tel:+19457329000"
+              className="flex items-center justify-between p-5 bg-gradient-to-r from-[#0057FF] to-[#0089ff] text-white rounded-2xl shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all group"
+            >
+              <div className="flex items-center gap-4 text-left">
+                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <div className="text-[10px] font-black text-blue-100 uppercase tracking-widest leading-none mb-1">Primary Number</div>
+                  <div className="text-base font-bold">+1 (945) 732-9000</div>
+                </div>
+              </div>
+              <ArrowRight size={18} className="text-white group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            {/* Secondary Number */}
+            <a
+              href="tel:+14695189938"
+              className={`flex items-center justify-between p-5 rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all group border ${
+                isDarkMode 
+                  ? 'bg-slate-800 border-slate-700 text-white hover:bg-slate-750' 
+                  : 'bg-slate-50 border-slate-100 text-slate-900 hover:bg-slate-100'
+              }`}
+            >
+              <div className="flex items-center gap-4 text-left">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                  isDarkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-200 text-slate-600'
+                }`}>
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <div className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 text-slate-400">Secondary Number</div>
+                  <div className={`text-base font-bold ${
+                    isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                  }`}>+1 (469) 518-9938</div>
+                </div>
+              </div>
+              <ArrowRight size={18} className={`group-hover:translate-x-1 transition-transform ${
+                isDarkMode ? 'text-slate-500' : 'text-slate-400'
+              }`} />
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+};
+
 export default function App() {
   const [activePage, setActivePage] = useState('Home');
   const [selectedCourse, setSelectedCourse] = useState<any>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isCallModalOpen, setIsCallModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activePage]);
 
   const handleTalkToCounselor = () => {
-    window.location.href = 'tel:+14695189938';
+    setIsCallModalOpen(true);
   };
 
   const toggleDarkMode = () => {
@@ -3962,7 +4090,7 @@ export default function App() {
         {activePage === 'Home' && <HomePage onNavigate={setActivePage} onOpenCourse={setSelectedCourse} onTalkToCounselor={handleTalkToCounselor} />}
         {activePage === 'About Us' && <AboutPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} onOpenCourse={setSelectedCourse} />}
         {activePage === 'Services' && <ServicesPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} onOpenCourse={setSelectedCourse} />}
-        {activePage === 'Courses' && <CoursesPage onOpenCourse={setSelectedCourse} onNavigate={setActivePage} />}
+        {activePage === 'Courses' && <CoursesPage onOpenCourse={setSelectedCourse} onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
         {activePage === 'Placements' && <PlacementsPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
         {activePage === 'Contact Us' && <ContactPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
         {activePage === 'Apply Now' && <ApplyNowPage onNavigate={setActivePage} onTalkToCounselor={handleTalkToCounselor} />}
@@ -3970,13 +4098,18 @@ export default function App() {
         {activePage === 'Terms & Conditions' && <TermsConditionsPage />}
       </main>
 
-      <Footer onNavigate={setActivePage} isDarkMode={isDarkMode} />
+      <Footer onNavigate={setActivePage} isDarkMode={isDarkMode} onTalkToCounselor={handleTalkToCounselor} />
       <WhatsAppButton />
       <CourseDetailModal
         course={selectedCourse}
         isOpen={!!selectedCourse}
         onClose={() => setSelectedCourse(null)}
         onNavigate={setActivePage}
+      />
+      <CallSelectionModal
+        isOpen={isCallModalOpen}
+        onClose={() => setIsCallModalOpen(false)}
+        isDarkMode={isDarkMode}
       />
     </div>
   );
