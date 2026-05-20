@@ -53,6 +53,14 @@ import tcsLogo from './images/tcs logo.png';
 import techMahindraLogo from './images/techmahindra.png';
 import wiproLogo from './images/wiprologo.png';
 import { CareersPage } from './CareersPage';
+import homeImg from './images/home.png';
+import aboutImg from './images/about.png';
+import servicesImg from './images/services.png';
+import applyNowImg from './images/applynow.png';
+import placementsImg from './images/placements.png';
+import coursesImg from './images/courses.png';
+import contactUsImg from './images/contactus.png';
+import careersImg from './images/careers.png';
 // --- Navbar ---
 const Navbar = ({ activePage, setActivePage, onTalkToCounselor, isDarkMode, toggleDarkMode }: { activePage: string, setActivePage: (page: string) => void, onTalkToCounselor: () => void, isDarkMode: boolean, toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -182,7 +190,7 @@ const AboutHero = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
           <div className="relative">
             <div className="relative z-10 rounded-[3rem] overflow-hidden border-8 border-slate-50 aspect-[4/3]">
               <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200"
+                src={aboutImg}
                 alt="Our Team"
                 className="w-full h-full object-cover"
               />
@@ -229,7 +237,7 @@ const WhoWeAre = () => {
           <div className="relative">
             <div className="rounded-[4rem] overflow-hidden shadow-2xl shadow-blue-900/10 border-8 border-white group aspect-[4/3]">
               <img
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200"
+                src={aboutImg}
                 alt="Office Space"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -588,52 +596,8 @@ const ServicesHero = ({ onNavigate }: { onNavigate: (page: string) => void }) =>
               transition={{ duration: 0.8 }}
               className="relative z-10"
             >
-              <div className="bg-white rounded-[3rem] p-8 shadow-[0_30px_100px_-20px_rgba(0,196,204,0.15)] border border-slate-50 relative overflow-hidden group">
-                {/* Laptop Illustration Representation */}
-                <div className="aspect-[4/3] bg-slate-50 rounded-[2rem] p-4 flex flex-col relative">
-                  {/* Screens floating around */}
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="absolute -top-4 -right-4 w-1/3 aspect-video bg-white rounded-xl shadow-xl border border-slate-100 p-2 z-20"
-                  >
-                    <div className="h-full bg-blue-50/50 rounded-lg flex flex-col gap-1 p-2">
-                      <div className="w-1/2 h-1 bg-blue-200 rounded"></div>
-                      <div className="w-full h-1 bg-slate-100 rounded"></div>
-                      <div className="w-3/4 h-1 bg-slate-100 rounded"></div>
-                    </div>
-                  </motion.div>
-
-                  <div className="flex-1 bg-slate-900 rounded-2xl overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-transparent"></div>
-                    <div className="p-8 space-y-4">
-                      <div className="h-2 w-1/4 bg-blue-500/20 rounded"></div>
-                      <div className="h-2 w-3/4 bg-slate-800 rounded"></div>
-                      <div className="h-2 w-1/2 bg-slate-800 rounded"></div>
-                      <div className="h-2 w-2/3 bg-slate-800 rounded"></div>
-                    </div>
-                    <Terminal className="absolute bottom-8 right-8 text-blue-500 opacity-20" size={100} />
-                  </div>
-                  {/* Keyboard suggestion */}
-                  <div className="h-4 w-full bg-slate-200 mt-4 rounded-b-xl"></div>
-                </div>
-
-                {/* Floating icon labels */}
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute bottom-10 left-10 p-4 bg-[#0057FF] rounded-2xl shadow-xl text-white z-20"
-                >
-                  <Code2 size={24} />
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity }}
-                  className="absolute top-20 left-10 p-4 bg-[#00C4CC] rounded-2xl shadow-xl text-white z-20"
-                >
-                  <Sparkles size={24} />
-                </motion.div>
+              <div className="relative z-10 rounded-[3rem] overflow-hidden border-8 border-slate-50 aspect-[4/3] shadow-2xl shadow-blue-900/10">
+                <img src={servicesImg} alt="Our Services" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </div>
@@ -810,7 +774,7 @@ const GlobalReach = () => {
           <div className="flex-1 w-full relative">
             <div className="aspect-square bg-slate-50 rounded-[3rem] border-8 border-white shadow-2xl overflow-hidden relative group">
               <img
-                src="https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?auto=format&fit=crop&q=80&w=1200"
+                src={homeImg}
                 alt="Global Office"
                 className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
               />
@@ -882,38 +846,12 @@ const CoursesHero = () => {
               transition={{ duration: 0.8 }}
               className="relative z-10"
             >
-              <div className="bg-white rounded-[3rem] p-6 shadow-[0_40px_100px_-20px_rgba(0,87,255,0.15)] border border-slate-50 relative overflow-hidden group">
-                {/* Visual representation of the Laptop with Course Icons */}
-                <div className="aspect-[4/3] bg-slate-50 rounded-[2rem] p-4 flex flex-col relative border border-slate-100">
-                  <div className="flex-1 bg-white rounded-2xl overflow-hidden shadow-inner border border-slate-200 flex flex-col">
-                    <div className="h-10 bg-slate-50 border-b border-slate-100 flex items-center px-4 justify-between">
-                      <div className="flex gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                        <div className="w-2 h-2 rounded-full bg-amber-400"></div>
-                        <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                      </div>
-                      <div className="text-[9px] font-black text-slate-400 uppercase tracking-widest">IT Courses</div>
-                    </div>
-                    <div className="flex-1 p-6 grid grid-cols-3 gap-4 h-full">
-                      {[Database, Code2, Cpu].map((Icon, i) => (
-                        <div key={i} className="aspect-square bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center text-blue-600 shadow-sm">
-                          <Icon size={24} />
-                        </div>
-                      ))}
-                      <div className="col-span-3 h-2 w-3/4 bg-slate-100 rounded"></div>
-                      <div className="col-span-2 h-2 w-full bg-slate-50 rounded"></div>
-                    </div>
-                  </div>
-                  <div className="h-6 w-full bg-slate-200 mt-4 rounded-b-xl border-t border-slate-300"></div>
-                </div>
-
-                {/* Floating elements */}
-                <div className="absolute -top-10 -right-10 grid grid-cols-4 gap-2 opacity-10">
-                  {[...Array(16)].map((_, i) => (
-                    <div key={i} className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                  ))}
-                </div>
-                <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-[#00C4CC]/10 rounded-full blur-2xl"></div>
+              <div className="relative z-10 rounded-[3rem] overflow-hidden border-8 border-slate-50 aspect-[4/3] shadow-2xl shadow-blue-900/10">
+                <img
+                  src={coursesImg}
+                  alt="IT Courses"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </motion.div>
           </div>
@@ -1179,7 +1117,7 @@ const PlacementsHero = () => {
               {[
                 { val: '500+', label: 'Students Trained', icon: <Users size={20} />, color: 'blue' },
                 { val: '200+', label: 'Successful Placements', icon: <Trophy size={20} />, color: 'cyan' },
-                { val: '95%', label: 'Placement Rate', icon: <BarChart size={20} />, color: 'indigo' }
+                { val: '98%', label: 'Placement Rate', icon: <BarChart size={20} />, color: 'indigo' }
               ].map((stat, i) => (
                 <motion.div
                   key={i}
@@ -1207,7 +1145,7 @@ const PlacementsHero = () => {
             >
               <div className="relative rounded-[4rem] overflow-hidden shadow-[0_60px_120px_-30px_rgba(0,0,0,0.15)] group">
                 <img
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
+                  src={placementsImg}
                   alt="Success Professionals"
                   className="w-full h-auto object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
                 />
@@ -1374,7 +1312,7 @@ const PlacementHighlightsBanner = () => {
               { val: '500+', label: 'Students Trained', icon: <Users size={36} strokeWidth={2.5} /> },
               { val: '200+', label: 'Successful Placements', icon: <Trophy size={36} strokeWidth={2.5} /> },
               { val: '500+', label: 'Successful Placements', icon: <Building size={36} strokeWidth={2.5} /> },
-              { val: '95%', label: 'Placement Rate', icon: <CheckCircle2 size={36} strokeWidth={2.5} /> }
+              { val: '98%', label: 'Placement Rate', icon: <CheckCircle2 size={36} strokeWidth={2.5} /> }
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -2040,7 +1978,7 @@ const PlacementSuccess = () => {
     { label: 'Students Trained', value: '500+', icon: <Users size={32} /> },
     { label: 'Success Stories', value: '200+', icon: <Award size={32} /> },
     { label: 'MNC Placements', value: '500+', icon: <Briefcase size={32} /> },
-    { label: 'Placement Rate', value: '95%', icon: <Sparkles size={32} /> },
+    { label: 'Placement Rate', value: '98%', icon: <Sparkles size={32} /> },
   ];
 
   return (
@@ -3014,7 +2952,7 @@ const Footer = ({ onNavigate, isDarkMode, onTalkToCounselor }: { onNavigate: (pa
               className="flex items-center gap-3 text-[10px] font-bold text-slate-500 hover:text-white bg-slate-900/50 hover:bg-slate-900 px-4 py-2 rounded-lg border border-slate-800 transition-all cursor-pointer"
             >
               <Phone size={12} className="text-[#0057FF]" />
-              +1 469 518 9938
+              +1 (945) 732-9000
             </button>
             <a
               href="mailto:info@itcareer.co?subject=Inquiry%20about%20IT%20Training%20%26%20Services&body=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20IT%20training%20programs%20and%20services.%20Please%20contact%20me%20with%20more%20information.%20Thank%20you!"
@@ -3084,7 +3022,7 @@ const ContactHero = ({ onTalkToCounselor }: { onTalkToCounselor: () => void }) =
           >
             <div className="relative z-10 rounded-[3rem] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?auto=format&fit=crop&q=80&w=1200"
+                src={contactUsImg}
                 alt="Support Representative"
                 className="w-full h-auto object-cover"
               />
@@ -3477,32 +3415,8 @@ const ApplyNowHero = () => {
               transition={{ duration: 1 }}
               className="relative z-10"
             >
-              <div className="relative bg-slate-50 p-8 rounded-[4rem] border-8 border-white shadow-2xl">
-                <div className="bg-white rounded-3xl p-8 shadow-sm">
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-4 h-4 bg-red-400 rounded-full"></div>
-                    <div className="w-4 h-4 bg-yellow-400 rounded-full"></div>
-                    <div className="w-4 h-4 bg-green-400 rounded-full"></div>
-                    <div className="ml-auto text-[10px] font-black text-slate-300 uppercase tracking-widest">Application Form</div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="h-10 bg-slate-50 rounded-xl"></div>
-                    <div className="h-10 bg-slate-50 rounded-xl"></div>
-                    <div className="h-10 bg-slate-50 rounded-xl"></div>
-                    <div className="h-20 bg-slate-50 rounded-xl"></div>
-                    <div className="h-12 bg-[#0057FF] rounded-xl flex items-center justify-center text-white font-bold text-xs uppercase tracking-widest">Submit</div>
-                  </div>
-                </div>
-
-                {/* Graduation Cap icon matching image */}
-                <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#0057FF] text-white rounded-[2rem] flex items-center justify-center rotate-12 shadow-2xl">
-                  <GraduationCap size={48} />
-                </div>
-                <div className="absolute -bottom-8 -right-8 flex flex-col gap-2">
-                  <div className="w-16 h-4 bg-red-400 rounded-full"></div>
-                  <div className="w-20 h-4 bg-blue-500 rounded-full"></div>
-                  <div className="w-12 h-4 bg-emerald-400 rounded-full"></div>
-                </div>
+              <div className="relative z-10 rounded-[3rem] overflow-hidden border-8 border-slate-50 aspect-[4/3] shadow-2xl shadow-blue-900/10">
+                <img src={applyNowImg} alt="Apply Now" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </div>
@@ -3943,7 +3857,7 @@ const CourseDetailModal = ({ course, isOpen, onClose, onNavigate }: { course: an
           <div className="w-full md:w-7/12 p-8 md:p-12">
             <div className="mb-10">
               <h3 className="text-xl font-black text-slate-900 mb-2">Get Full Syllabus & Details</h3>
-              <p className="text-slate-500 text-xs font-medium">Fill in your details to receive the training plan via WhatsApp.</p>
+              <p className="text-slate-500 text-xs font-medium">Fill in your details to receive the training plan.</p>
             </div>
 
             <form className="space-y-5" onSubmit={handleSubmitInquiry}>
